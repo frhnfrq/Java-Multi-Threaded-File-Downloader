@@ -10,6 +10,7 @@ File downloader written in Java. Uses thread to download files in multiple conne
 ## How-To
 
 Create an instance of `DownloadManager` using the constructor `DownloadManager(int concurrentDownload)`. Set `DownloadListener` to the instance of `DownloadManager` using `setDownloadListener`. 
+Set path and max connection per downloads, `DownloadManager.Config.path = "D:\\downloads"` and ` DownloadManager.Config.connections = 8`
 Create an instance of `URL` using the file url and call `downloadManager.download(url)`.
 
 ## Example
@@ -18,6 +19,8 @@ Create an instance of `URL` using the file url and call `downloadManager.downloa
 public static void main(String[] args) {
         try {
             DownloadManager downloadManager = new DownloadManager(100); // 100 concurrent downloads
+            DownloadManager.Config.path = "H:\\transfer";
+            DownloadManager.Config.connections = 8;
             downloadManager.setDownloadListener(new DownloadListener() {
                 @Override
                 public void onDownloadStarted(Downloader.DownloadStatus downloadStatus) {
@@ -39,7 +42,7 @@ public static void main(String[] args) {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+}
 ```
 ## Methods
 * `download(URL url)` - Downloads the file from the URL and returns a String containing the process Id.
